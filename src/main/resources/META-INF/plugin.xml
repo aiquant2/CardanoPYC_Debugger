@@ -1,0 +1,34 @@
+<idea-plugin>
+    <id>org.cardanopyc.debugger</id>
+    <name>CardanoPyC Debugger</name>
+    <vendor url ="https://github.com/AIQUANT-Tech"> AIQUANT TECHNOLOGIES</vendor>
+
+    <description><![CDATA[
+        A sample plugin that supports for debugging haskell / smart contract.<br>
+        <em>Developed with love using the IntelliJ Platform</em>
+    ]]></description>
+
+    <!-- Platform dependency (keep this) -->
+    <depends>com.intellij.modules.platform</depends>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- You can add extensions here later -->
+
+        <fileType name="Haskell"
+                  implementationClass="com.pyc.cardanopyc_debugger.HaskellFileType"
+                  language="Haskell"
+                  extensions="hs"
+        />
+
+    </extensions>
+
+    <actions>
+        <action id="CardanoRunAction"
+                class="com.pyc.cardanopyc_debugger.actions.RunPlutusScriptAction"
+                text="Run Plutus Contract"
+                description="Run and validate Cardano smart contract (.hs)">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
