@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>org.cardanopyc.debugger</id>
+    <id>com.pyc.cardanopyc_debugger</id>
     <name>CardanoPyC Debugger</name>
     <vendor url ="https://github.com/AIQUANT-Tech"> AIQUANT TECHNOLOGIES</vendor>
 
