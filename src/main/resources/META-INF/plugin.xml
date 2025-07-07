@@ -15,20 +15,14 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- You can add extensions here later -->
 
-        <fileType name="Haskell"
-                  implementationClass="com.pyc.cardanopyc_debugger.HaskellFileType"
-                  language="Haskell"
-                  extensions="hs"
-        />
+        <statusBarWidgetFactory implementation="com.pyc.cardanopyc_debugger.diagnostic.HaskellStatusBarFactory"/>
 
+        <projectService serviceImplementation="com.pyc.cardanopyc_debugger.diagnostic.GhcidProcessHandler"/>
+        <projectService serviceImplementation="com.pyc.cardanopyc_debugger.diagnostic.ProblemManager"/>
     </extensions>
+    <projectListeners>
+        <listener class="com.pyc.cardanopyc_debugger.diagnostic.FileOpenListener" topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+        <listener class="com.pyc.cardanopyc_debugger.diagnostic.FileChangeListener" topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>
+    </projectListeners>
 
-    <actions>
-        <action id="CardanoRunAction"
-                class="com.pyc.cardanopyc_debugger.actions.RunPlutusScriptAction"
-                text="Run Plutus Contract"
-                description="Run and validate Cardano smart contract (.hs)">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
-    </actions>
 </idea-plugin>
