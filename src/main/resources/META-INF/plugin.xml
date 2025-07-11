@@ -16,8 +16,14 @@
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="com.haskell.ghcid.GhcidRunner"/>
 
-    </extensions>
 
+
+    </extensions>
+    <projectListeners>
+        <listener
+                class="com.haskell.ghcid.HaskellFileListener"
+                topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+    </projectListeners>
     <actions>
         <action id="HaskellGhcid.Start"
                 class="com.haskell.ghcid.StartGhcidAction"

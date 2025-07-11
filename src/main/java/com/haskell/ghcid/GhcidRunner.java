@@ -299,4 +299,8 @@ public class GhcidRunner implements Disposable {
     public Project getProject() {
         return this.project;
     }
+    public boolean isRunning() {
+        return processHandler != null && !processHandler.isProcessTerminated();
+    }
+
 }
