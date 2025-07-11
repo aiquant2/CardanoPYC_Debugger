@@ -35,5 +35,5 @@ public class StartGhcidAction extends AnAction {
     }
 }
 
-// Updated StopGhcidAction.java
+
 

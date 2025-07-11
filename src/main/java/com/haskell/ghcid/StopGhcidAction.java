@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 
+
 public class StopGhcidAction extends AnAction {
     @Override
     public void actionPerformed(@org.jetbrains.annotations.NotNull AnActionEvent e) {
@@ -16,6 +17,8 @@ public class StopGhcidAction extends AnAction {
             GhcidRunner.getInstance(project).stop();
         }
     }
+
+
 
 
 @Override
