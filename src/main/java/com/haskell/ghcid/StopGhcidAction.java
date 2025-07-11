@@ -17,15 +17,11 @@ public class StopGhcidAction extends AnAction {
         }
     }
 
-//    @Override
-//    public void update(@org.jetbrains.annotations.NotNull AnActionEvent e) {
-//        Project project = e.getProject();
-//        e.getPresentation().setEnabledAndVisible(project != null);
-//    }
+
 @Override
 public void update(@NotNull AnActionEvent e) {
     Project project = e.getProject();
-    boolean enabled = project != null && GhcidRunner.getInstance(project).isRunning();
+    boolean enabled = project != null ;
     e.getPresentation().setEnabledAndVisible(enabled);
 }
 

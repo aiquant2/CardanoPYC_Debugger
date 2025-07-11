@@ -1,43 +1,4 @@
-<!--<idea-plugin>-->
-<!--    <id>com.pyc.cardanopyc_debugger</id>-->
-<!--    <name>CardanoPyC Debugger</name>-->
-<!--    <vendor url ="https://github.com/AIQUANT-Tech"> AIQUANT TECHNOLOGIES</vendor>-->
 
-<!--    <description><![CDATA[-->
-<!--        A sample plugin that supports for debugging haskell / smart contract.<br>-->
-<!--        <em>Developed with love using the IntelliJ Platform</em>-->
-<!--    ]]></description>-->
-<!--    <idea-version since-build="231" until-build="241.*"/>-->
-
-<!--    &lt;!&ndash; Platform dependency (keep this) &ndash;&gt;-->
-<!--    <depends>com.intellij.modules.platform</depends>-->
-
-
-<!--    <extensions defaultExtensionNs="com.intellij">-->
-<!--        <projectService serviceImplementation="com.haskell.ghcid.GhcidRunner"/>-->
-
-<!--    </extensions>-->
-
-<!--    <actions>-->
-<!--        <action id="HaskellGhcid.Start"-->
-<!--                class="com.haskell.ghcid.StartGhcidAction"-->
-<!--                text="Start GHCID"-->
-<!--                description="Start Haskell error checking with ghcid">-->
-<!--            <add-to-group group-id="ToolsMenu" anchor="last"/>-->
-<!--        </action>-->
-<!--        <action id="HaskellGhcid.Stop"-->
-<!--                class="com.haskell.ghcid.StopGhcidAction"-->
-<!--                text="Stop GHCID"-->
-<!--                description="Stop Haskell error checking">-->
-<!--            <add-to-group group-id="ToolsMenu" anchor="last"/>-->
-<!--        </action>-->
-<!--    </actions>-->
-
-
-<!--</idea-plugin>-->
-
-
-<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
 <idea-plugin>
     <id>com.pyc.cardanopyc_debugger</id>
     <name>CardanoPyC Debugger</name>

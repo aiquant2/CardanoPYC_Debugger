@@ -13,9 +13,12 @@ import org.jetbrains.annotations.NotNull;
 public class StartGhcidAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        System.out.println("call");
         Project project = e.getProject();
         if (project != null) {
+            GhcidRunner.getInstance(project);
             GhcidRunner.getInstance(project).start();
+
         }
     }
 
@@ -24,12 +27,7 @@ public class StartGhcidAction extends AnAction {
         Project project = e.getProject();
         e.getPresentation().setEnabledAndVisible(project != null);
     }
-//@Override
-//public void update(@NotNull AnActionEvent e) {
-//    Project project = e.getProject();
-//    boolean enabled = project != null && !GhcidRunner.getInstance(project).isRunning();
-//    e.getPresentation().setEnabledAndVisible(enabled);
-//}
+
 
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {
