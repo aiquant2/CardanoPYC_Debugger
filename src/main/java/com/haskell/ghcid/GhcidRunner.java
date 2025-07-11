@@ -143,6 +143,7 @@ public class GhcidRunner implements Disposable {
         }
     }
 
+
     private void highlightError(VirtualFile file, int lineNumber, int columnNumber, String errorType, String message) {
         ApplicationManager.getApplication().invokeLater(() -> {
             Document document = FileDocumentManager.getInstance().getDocument(file);
@@ -154,21 +155,57 @@ public class GhcidRunner implements Disposable {
 
             int lineStart = document.getLineStartOffset(lineNumber);
             int lineEnd = document.getLineEndOffset(lineNumber);
+            String lineText = document.getText().substring(lineStart, lineEnd);
+
+            // Default highlighting range
             int startOffset = lineStart + columnNumber;
             int endOffset = startOffset + 1;
 
-            String lineText = document.getText().substring(lineStart, lineEnd);
+            // Adjust if within line bounds
             if (columnNumber < lineText.length()) {
-                int wordStart = columnNumber;
-                while (wordStart > 0 && !Character.isWhitespace(lineText.charAt(wordStart - 1))) wordStart--;
-                int wordEnd = columnNumber;
-                while (wordEnd < lineText.length() && !Character.isWhitespace(lineText.charAt(wordEnd))) wordEnd++;
+                String remainingText = lineText.substring(columnNumber);
 
-                startOffset = lineStart + wordStart;
-                endOffset = lineStart + wordEnd;
+                // Stop at the next whitespace or special character
+                int errorLength = findErrorEndOffset(remainingText);
+
+                // Special case: highlight full remaining line if it's an import or syntax issue
+                if (remainingText.trim().startsWith("import") || errorType.toLowerCase().contains("error")) {
+                    errorLength = remainingText.length();
+                }
+
+                startOffset = lineStart + columnNumber;
+                endOffset = Math.min(startOffset + errorLength, document.getTextLength());
             }
 
+             TextAttributes ERROR_ATTRIBUTES = new TextAttributes(
+                     new JBColor(
+                             new Color(64, 16, 16, 120),
+                             new Color(255, 235, 235)
+                     ),
+                     new JBColor(
+                             new Color(255, 77, 77),
+                             new Color(200, 50, 50)
+                     ),
+                    JBColor.RED,
+                    EffectType.WAVE_UNDERSCORE,
+                    Font.PLAIN
+            );
+
+             TextAttributes WARNING_ATTRIBUTES = new TextAttributes(
+                     new JBColor(
+                             new Color(55, 44, 20, 100),       
+                             new Color(255, 250, 210)          
+                     ),
+                     new JBColor(
+                             new Color(255, 180, 40),          
+                             new Color(255, 140, 0)            
+                     ),
+                    JBColor.ORANGE,
+                    EffectType.WAVE_UNDERSCORE,
+                    Font.PLAIN
+            );
             TextAttributes attributes = errorType.toLowerCase().contains("error") ? ERROR_ATTRIBUTES : WARNING_ATTRIBUTES;
+
 
             RangeHighlighter highlighter = editor.getMarkupModel().addRangeHighlighter(
                     startOffset, endOffset,
@@ -181,9 +218,9 @@ public class GhcidRunner implements Disposable {
             highlighter.setGutterIconRenderer(new GutterIconRenderer() {
                 @Override
                 public @NotNull Icon getIcon() {
-                    return errorType.toLowerCase().contains("error") ?
-                            com.intellij.icons.AllIcons.General.Error :
-                            com.intellij.icons.AllIcons.General.Warning;
+                    return errorType.toLowerCase().contains("error")
+                            ? com.intellij.icons.AllIcons.General.Error
+                            : com.intellij.icons.AllIcons.General.Warning;
                 }
 
                 @Override
@@ -192,15 +229,30 @@ public class GhcidRunner implements Disposable {
                 }
 
                 @Override
-                public boolean equals(Object obj) { return false; }
+                public boolean equals(Object obj) {
+                    return false;
+                }
 
                 @Override
-                public int hashCode() { return 0; }
+                public int hashCode() {
+                    return 0;
+                }
             });
 
             highlighters.computeIfAbsent(file, k -> new ArrayList<>()).add(highlighter);
         });
     }
+    private int findErrorEndOffset(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            if (Character.isWhitespace(ch) || ";,(){}[]".indexOf(ch) != -1) {
+                return i;
+            }
+        }
+        return text.length(); // If no break point found, highlight full
+    }
+
+    
 
     private void clearFixedHighlights() {
         Set<VirtualFile> oldFiles = new HashSet<>(highlighters.keySet());
