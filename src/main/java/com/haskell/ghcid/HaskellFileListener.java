@@ -22,7 +22,7 @@ public class HaskellFileListener implements FileEditorManagerListener {
 
     private void runGhcidIfHaskell(VirtualFile file, Project project) {
         if (file.getName().endsWith(".hs")) {
-            GhcidRunner runner = GhcidRunner.getInstance(project);
+            GhcidRunner runner = new GhcidRunner(project);
             if (runner.isCabalProject() && !runner.isRunning()) {
                 runner.start();
             }
