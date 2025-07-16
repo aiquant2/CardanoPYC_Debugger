@@ -16,7 +16,9 @@
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="com.haskell.ghcid.GhcidRunner"/>
 
-
+        <postStartupActivity implementation="com.haskell.ghcid.GhcidStartupActivity"/>
+        <projectService serviceImplementation="com.haskell.ghcid.GhcidRunConfigurationType"/>
+        <runConfigurationType implementation="com.haskell.ghcid.GhcidRunConfigurationType"/>
 
     </extensions>
     <projectListeners>
@@ -31,6 +33,22 @@
                 description="Start Haskell error checking with ghcid">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
+
+        <action id="TriggerRunDebugAction"
+                class="com.haskell.ghcid.TriggerDebugAction"
+                text="Trigger Run"
+                description="Triggers the Run button">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+        <action id="GhcidAutoDebug"
+                class="com.haskell.ghcid.TriggerGhcidDebugAction"
+                text="Trigger Ghcid Debug"
+                description="Run Ghcid automatically in debug mode">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+
         <action id="HaskellGhcid.Stop"
                 class="com.haskell.ghcid.StopGhcidAction"
                 text="Stop GHCID"
