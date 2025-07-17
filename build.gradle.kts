@@ -34,6 +34,7 @@ intellijPlatform {
         ideaVersion {
             sinceBuild = "241" // Matches 2024.1.x
         }
+        
 
         changeNotes = """
           Initial CardanoPyC Debugger for Haskell & Smart Contracts.
@@ -52,5 +53,5 @@ tasks {
 }
 
 
-// new
+
 
