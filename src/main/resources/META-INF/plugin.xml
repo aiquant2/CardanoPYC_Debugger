@@ -10,6 +10,9 @@
     ]]></description>
     <idea-version since-build="231" until-build="241.*"/>
 
+
+
+    <depends>ca.justinpark.build.idea-docker-java-debugger</depends>
     <!-- Platform dependency (keep this) -->
     <depends>com.intellij.modules.platform</depends>
 
