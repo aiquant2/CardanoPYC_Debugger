@@ -23,6 +23,9 @@ dependencies {
 
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
+
+    // ✅ Add JUnit 4 (required by IntelliJ Test Framework)
+    testImplementation("junit:junit:4.13.2")
 }
 
 intellijPlatform {
@@ -30,10 +33,6 @@ intellijPlatform {
         ideaVersion {
             sinceBuild = "241" // Matches 2024.1.x
         }
-
-
-
-
 
         changeNotes = """
           Initial CardanoPyC Debugger for Haskell & Smart Contracts.
@@ -50,7 +49,6 @@ tasks {
         kotlinOptions.jvmTarget = "21"
     }
 }
-
 
 
 

@@ -1,0 +1,12 @@
+<scheme name="YellowJava" version="142" parent_scheme="Default">
+    <option name="JAVA_KEYWORD" baseAttributes="DEFAULT_KEYWORD">
+        <value>
+            <option name="FOREGROUND" value="FFFF00" /> <!-- bright yellow -->
+        </value>
+    </option>
+    <option name="JAVA_CLASS_NAME" baseAttributes="DEFAULT_CLASS_NAME">
+        <value>
+            <option name="FOREGROUND" value="FFDD00" /> <!-- slightly orange-yellow -->
+        </value>
+    </option>
+</scheme>

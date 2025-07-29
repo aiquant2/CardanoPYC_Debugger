@@ -12,16 +12,15 @@
 
 
 
-    <depends>ca.justinpark.build.idea-docker-java-debugger</depends>
+
     <!-- Platform dependency (keep this) -->
     <depends>com.intellij.modules.platform</depends>
 
+
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="com.haskell.ghcid.GhcidRunner"/>
+        <colorScheme schemePath="/colors/YellowJavaColorScheme.xml"/>
 
-        <postStartupActivity implementation="com.haskell.ghcid.GhcidStartupActivity"/>
-        <projectService serviceImplementation="com.haskell.ghcid.GhcidRunConfigurationType"/>
-        <runConfigurationType implementation="com.haskell.ghcid.GhcidRunConfigurationType"/>
 
     </extensions>
     <projectListeners>
@@ -58,7 +57,11 @@
                 description="Stop Haskell error checking">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
+
     </actions>
-
-
+    <extensions defaultExtensionNs="com.intellij">
+    <configurationType implementation="com.plugin.CabalDebugConfigurationType"/>
+    <programRunner implementation="com.plugin.CabalDebugRunner"/>
+    <runConfigurationProducer implementation="com.plugin.CabalDebugConfigurationProducer"/>
+</extensions>
 </idea-plugin>

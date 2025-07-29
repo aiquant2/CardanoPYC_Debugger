@@ -1,20 +1,19 @@
-package com.haskell.ghcid;//package com.haskell.ghcid;
-//
-import com.haskell.ghcid.GhcidRunner;
+package com.haskell.ghcid;
+
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
-//
-//
 
-// Updated StartGhcidAction.java
 public class StartGhcidAction extends AnAction {
     @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
+        public void actionPerformed(@NotNull AnActionEvent e){
+
         System.out.println("call");
+
         Project project = e.getProject();
+
         if (project != null) {
             GhcidRunner.getInstance(project);
             GhcidRunner.getInstance(project).start();
@@ -35,5 +34,4 @@ public class StartGhcidAction extends AnAction {
     }
 }
 
-// Updated StopGhcidAction.java
 
