@@ -1,5 +1,4 @@
 
-
 package com.haskell.ghcid;
 
 import com.intellij.execution.ExecutionException;
@@ -44,33 +43,33 @@ public class GhcidRunner implements Disposable {
     private final Alarm restartAlarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this);
     private boolean listenersAttached = false;
 
-                TextAttributes ERROR_ATTRIBUTES = new TextAttributes(
-                    new JBColor(
-                            new Color(64, 16, 16, 120),
-                            new Color(255, 235, 235)
-                    ),
-                    new JBColor(
-                            new Color(255, 77, 77),
-                            new Color(200, 50, 50)
-                    ),
-                    JBColor.RED,
-                    EffectType.WAVE_UNDERSCORE,
-                    Font.PLAIN
-            );
+    TextAttributes ERROR_ATTRIBUTES = new TextAttributes(
+            new JBColor(
+                    new Color(64, 16, 16, 120),
+                    new Color(255, 235, 235)
+            ),
+            new JBColor(
+                    new Color(255, 77, 77),
+                    new Color(200, 50, 50)
+            ),
+            JBColor.RED,
+            EffectType.WAVE_UNDERSCORE,
+            Font.PLAIN
+    );
 
-            TextAttributes WARNING_ATTRIBUTES = new TextAttributes(
-                    new JBColor(
-                            new Color(55, 44, 20, 100),
-                            new Color(255, 250, 210)
-                    ),
-                    new JBColor(
-                            new Color(255, 180, 40),
-                            new Color(255, 140, 0)
-                    ),
-                    JBColor.ORANGE,
-                    EffectType.WAVE_UNDERSCORE,
-                    Font.PLAIN
-            );
+    TextAttributes WARNING_ATTRIBUTES = new TextAttributes(
+            new JBColor(
+                    new Color(55, 44, 20, 100),
+                    new Color(255, 250, 210)
+            ),
+            new JBColor(
+                    new Color(255, 180, 40),
+                    new Color(255, 140, 0)
+            ),
+            JBColor.ORANGE,
+            EffectType.WAVE_UNDERSCORE,
+            Font.PLAIN
+    );
 
     public GhcidRunner(Project project) {
         this.project = project;
@@ -153,7 +152,7 @@ public class GhcidRunner implements Disposable {
         }
     }
 
-    private void processGhcidOutputBlock(String[] lines) {
+    void processGhcidOutputBlock(String[] lines) {
         if (lines == null || lines.length == 0) return;
         Pattern pattern = Pattern.compile("^(?<file>.+?\\.hs):(?<line>\\d+):(?<column>\\d+):\\s*(?<type>error|warning|\\[error]|\\[warning]):?");
         Matcher matcher = pattern.matcher(lines[0]);
@@ -180,7 +179,7 @@ public class GhcidRunner implements Disposable {
     }
 
 
-    private void highlightError(VirtualFile file, int lineNumber, int columnNumber, String errorType, String message) {
+    protected void highlightError(VirtualFile file, int lineNumber, int columnNumber, String errorType, String message) {
         ApplicationManager.getApplication().invokeLater(() -> {
             // Get document and validate
             Document document = FileDocumentManager.getInstance().getDocument(file);
@@ -336,7 +335,7 @@ public class GhcidRunner implements Disposable {
         }
     }
 
-    private VirtualFile findVirtualFile(String filePath) {
+    VirtualFile findVirtualFile(String filePath) {
         VirtualFile baseDir = project.getBaseDir();
         if (baseDir == null) return null;
         Path resolvedPath = Paths.get(project.getBasePath()).resolve(filePath).normalize();
