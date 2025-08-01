@@ -25,6 +25,27 @@ public class CabalDebugConfiguration extends LocatableConfigurationBase<CommandL
         return new CabalDebugSettingsEditor();
     }
 
+    public static GeneralCommandLine buildCommandLine(String cabalRoot, boolean isWindows) {
+        GeneralCommandLine commandLine = new GeneralCommandLine();
+        commandLine.setWorkDirectory(cabalRoot);
+        commandLine.setCharset(StandardCharsets.UTF_8);
+
+        if (isWindows) {
+            commandLine.setExePath("cmd");
+            commandLine.addParameters("/c", "echo \u001B[33mStarting GHCi...\u001B[0m && cabal repl");
+        } else {
+            commandLine.setExePath("/bin/bash");
+            String yellow = "\u001B[33m";
+            String reset = "\u001B[0m";
+            String echoAndRun = "echo -e \"" + yellow + "Starting GHCi..." + reset + "\" && cabal repl";
+            commandLine.addParameters("-c", echoAndRun);
+        }
+
+        return commandLine;
+    }
+
+
+
     @NotNull
     @Override
     public CommandLineState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {

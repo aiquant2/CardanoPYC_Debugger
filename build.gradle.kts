@@ -27,6 +27,10 @@ dependencies {
     // ✅ Add JUnit 4 (required by IntelliJ Test Framework)
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:5.12.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testImplementation("org.mockito:mockito-core:5.10.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.10.0")
+
 }
 
 intellijPlatform {
