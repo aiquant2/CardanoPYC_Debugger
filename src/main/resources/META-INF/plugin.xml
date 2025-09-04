@@ -1,5 +1,6 @@
+
 <idea-plugin>
-    <id>org.cardanopyc.debugger</id>
+    <id>com.pyc.cardanopyc_debugger</id>
     <name>CardanoPyC Debugger</name>
     <vendor url ="https://github.com/AIQUANT-Tech"> AIQUANT TECHNOLOGIES</vendor>
 
@@ -7,28 +8,60 @@
         A sample plugin that supports for debugging haskell / smart contract.<br>
         <em>Developed with love using the IntelliJ Platform</em>
     ]]></description>
+    <idea-version since-build="231" until-build="241.*"/>
+
+
+
 
     <!-- Platform dependency (keep this) -->
     <depends>com.intellij.modules.platform</depends>
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- You can add extensions here later -->
+        <projectService serviceImplementation="com.haskell.ghcid.GhcidRunner"/>
+        <colorScheme schemePath="/colors/YellowJavaColorScheme.xml"/>
 
-        <fileType name="Haskell"
-                  implementationClass="com.pyc.cardanopyc_debugger.HaskellFileType"
-                  language="Haskell"
-                  extensions="hs"
-        />
 
     </extensions>
-
+    <projectListeners>
+        <listener
+                class="com.haskell.ghcid.HaskellFileListener"
+                topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+    </projectListeners>
     <actions>
-        <action id="CardanoRunAction"
-                class="com.pyc.cardanopyc_debugger.actions.RunPlutusScriptAction"
-                text="Run Plutus Contract"
-                description="Run and validate Cardano smart contract (.hs)">
+        <action id="HaskellGhcid.Start"
+                class="com.haskell.ghcid.StartGhcidAction"
+                text="Start GHCID"
+                description="Start Haskell error checking with ghcid">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
+
+        <action id="TriggerRunDebugAction"
+                class="com.haskell.ghcid.TriggerDebugAction"
+                text="Trigger Run"
+                description="Triggers the Run button">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+        <action id="GhcidAutoDebug"
+                class="com.haskell.ghcid.TriggerGhcidDebugAction"
+                text="Trigger Ghcid Debug"
+                description="Run Ghcid automatically in debug mode">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+
+        <action id="HaskellGhcid.Stop"
+                class="com.haskell.ghcid.StopGhcidAction"
+                text="Stop GHCID"
+                description="Stop Haskell error checking">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
     </actions>
+    <extensions defaultExtensionNs="com.intellij">
+    <configurationType implementation="com.plugin.CabalDebugConfigurationType"/>
+    <programRunner implementation="com.plugin.CabalDebugRunner"/>
+    <runConfigurationProducer implementation="com.plugin.CabalDebugConfigurationProducer"/>
+</extensions>
 </idea-plugin>
