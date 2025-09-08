@@ -3,9 +3,10 @@ package com.plugin;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
+import com.intellij.execution.runners.GenericProgramRunner;
 import org.jetbrains.annotations.NotNull;
 
-public class CabalDebugRunner extends DefaultProgramRunner {
+public class CabalDebugRunner extends GenericProgramRunner {
     @NotNull
     @Override
     public String getRunnerId() {

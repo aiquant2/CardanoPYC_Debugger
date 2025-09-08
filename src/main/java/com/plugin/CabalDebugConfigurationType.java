@@ -5,7 +5,7 @@ import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
+import javax.swing.Icon;
 
 public class CabalDebugConfigurationType implements ConfigurationType {
     private static final CabalDebugConfigurationType INSTANCE = new CabalDebugConfigurationType();

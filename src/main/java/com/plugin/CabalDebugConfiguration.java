@@ -3,7 +3,11 @@ package com.plugin;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.*;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.CommandLineState;
+import com.intellij.execution.configurations.LocatableConfigurationBase;
+import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -11,7 +15,6 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import org.jetbrains.annotations.NotNull;
-
 import java.nio.charset.StandardCharsets;
 
 public class CabalDebugConfiguration extends LocatableConfigurationBase<CommandLineState> {
@@ -19,7 +22,6 @@ public class CabalDebugConfiguration extends LocatableConfigurationBase<CommandL
         super(project, factory, name);
     }
 
-    @NotNull
     @Override
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new CabalDebugSettingsEditor();

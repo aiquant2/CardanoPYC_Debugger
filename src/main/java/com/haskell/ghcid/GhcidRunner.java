@@ -3,7 +3,9 @@ package com.haskell.ghcid;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.process.*;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
@@ -11,7 +13,13 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
-import com.intellij.openapi.editor.markup.*;
+import com.intellij.openapi.editor.markup.RangeHighlighter;
+import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.editor.markup.EffectType;
+import com.intellij.openapi.editor.markup.MarkupModel;
+import com.intellij.openapi.editor.markup.HighlighterLayer;
+import com.intellij.openapi.editor.markup.HighlighterTargetArea;
+import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
@@ -21,13 +29,17 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.intellij.util.Alarm;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.Icon;
+import java.awt.Color;
+import java.awt.Font;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -336,7 +348,7 @@ public class GhcidRunner implements Disposable {
     }
 
     VirtualFile findVirtualFile(String filePath) {
-        VirtualFile baseDir = project.getBaseDir();
+        VirtualFile baseDir = project.getProjectFile();
         if (baseDir == null) return null;
         Path resolvedPath = Paths.get(project.getBasePath()).resolve(filePath).normalize();
         return baseDir.getFileSystem().findFileByPath(resolvedPath.toString());
@@ -370,7 +382,7 @@ public class GhcidRunner implements Disposable {
 //    }
 
     public boolean isCabalProject() {
-        VirtualFile projectDir = project.getBaseDir();
+        VirtualFile projectDir = project.getProjectFile();
         if (projectDir == null) return false;
 
         return containsCabalProjectFile(projectDir);

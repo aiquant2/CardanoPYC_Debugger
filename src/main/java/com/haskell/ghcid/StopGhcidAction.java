@@ -1,6 +1,5 @@
 package com.haskell.ghcid;
 
-import com.haskell.ghcid.GhcidRunner;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

@@ -73,7 +73,7 @@ plugins {
 }
 
 group = "com.pyc.cardanopyc_debugger"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -130,4 +130,7 @@ tasks {
     prepareJarSearchableOptions {
         enabled = false
     }
+}
+tasks.withType<JavaCompile> {
+    options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:unchecked"))
 }
