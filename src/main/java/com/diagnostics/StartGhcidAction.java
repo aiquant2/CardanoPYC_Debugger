@@ -1,4 +1,4 @@
-package com.haskell.ghcid;
+package com.diagnostics;
 
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;

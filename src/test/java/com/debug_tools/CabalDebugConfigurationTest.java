@@ -1,4 +1,4 @@
-package com.plugin;
+package com.debug_tools;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.haskell.ghcid;
+package com.diagnostics;
 
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;

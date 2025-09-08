@@ -1,5 +1,5 @@
 
-package com.plugin;
+package com.debug_tools;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;

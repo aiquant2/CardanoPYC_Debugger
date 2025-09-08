@@ -33,7 +33,7 @@
 //    }
 //}
 
-package com.plugin;
+package com.debug_tools;
 
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.RunConfigurationProducer;

@@ -1,4 +1,4 @@
-package com.plugin;
+package com.debug_tools;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.diagnostic.Logger;

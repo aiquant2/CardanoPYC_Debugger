@@ -1,5 +1,5 @@
 
-package com.haskell.ghcid;
+package com.diagnostics;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -25,6 +25,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.intellij.util.Alarm;
@@ -347,11 +348,20 @@ public class GhcidRunner implements Disposable {
         }
     }
 
+//    VirtualFile findVirtualFile(String filePath) {
+//        VirtualFile baseDir = project.getBaseDir();
+//        if (baseDir == null) return null;
+//        Path resolvedPath = Paths.get(project.getBasePath()).resolve(filePath).normalize();
+//        return baseDir.getFileSystem().findFileByPath(resolvedPath.toString());
+//    }
+
+
     VirtualFile findVirtualFile(String filePath) {
-        VirtualFile baseDir = project.getProjectFile();
-        if (baseDir == null) return null;
-        Path resolvedPath = Paths.get(project.getBasePath()).resolve(filePath).normalize();
-        return baseDir.getFileSystem().findFileByPath(resolvedPath.toString());
+        String basePath = project.getBasePath();
+        if (basePath == null) return null;
+
+        Path resolvedPath = Paths.get(basePath).resolve(filePath).normalize();
+        return LocalFileSystem.getInstance().findFileByPath(resolvedPath.toString());
     }
 
     @Override
@@ -380,13 +390,22 @@ public class GhcidRunner implements Disposable {
 //                projectDir.findChild("cabal.project.freeze") != null ||
 //                hasCabalFiles(projectDir);
 //    }
+//
+//    public boolean isCabalProject() {
+//        VirtualFile projectDir = project.getBaseDir();
+//        if (projectDir == null) return false;
+//
+//        return containsCabalProjectFile(projectDir);
+//    }
+public boolean isCabalProject() {
+    String basePath = project.getBasePath();
+    if (basePath == null) return false;
 
-    public boolean isCabalProject() {
-        VirtualFile projectDir = project.getProjectFile();
-        if (projectDir == null) return false;
+    VirtualFile projectDir = LocalFileSystem.getInstance().findFileByPath(basePath);
+    if (projectDir == null) return false;
 
-        return containsCabalProjectFile(projectDir);
-    }
+    return containsCabalProjectFile(projectDir);
+}
 
     private boolean containsCabalProjectFile(VirtualFile dir) {
         for (VirtualFile file : dir.getChildren()) {

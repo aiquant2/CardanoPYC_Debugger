@@ -8,7 +8,7 @@
         A sample plugin that supports for debugging haskell / smart contract.<br>
         <em>Developed with love using the IntelliJ Platform</em>
     ]]></description>
-    <idea-version since-build="231" until-build="241.*"/>
+    <idea-version since-build="241" until-build="252.*"/>
 
 
 
@@ -18,41 +18,28 @@
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceImplementation="com.haskell.ghcid.GhcidRunner"/>
-        <colorScheme schemePath="/colors/YellowJavaColorScheme.xml"/>
+        <projectService serviceImplementation="com.diagnostics.GhcidRunner"/>
 
 
     </extensions>
     <projectListeners>
         <listener
-                class="com.haskell.ghcid.HaskellFileListener"
+                class="com.diagnostics.HaskellFileListener"
                 topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
     </projectListeners>
     <actions>
         <action id="HaskellGhcid.Start"
-                class="com.haskell.ghcid.StartGhcidAction"
+                class="com.diagnostics.StartGhcidAction"
                 text="Start GHCID"
                 description="Start Haskell error checking with ghcid">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
 
-        <action id="TriggerRunDebugAction"
-                class="com.haskell.ghcid.TriggerDebugAction"
-                text="Trigger Run"
-                description="Triggers the Run button">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
 
-        <action id="GhcidAutoDebug"
-                class="com.haskell.ghcid.TriggerGhcidDebugAction"
-                text="Trigger Ghcid Debug"
-                description="Run Ghcid automatically in debug mode">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
 
 
         <action id="HaskellGhcid.Stop"
-                class="com.haskell.ghcid.StopGhcidAction"
+                class="com.diagnostics.StopGhcidAction"
                 text="Stop GHCID"
                 description="Stop Haskell error checking">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
@@ -60,8 +47,8 @@
 
     </actions>
     <extensions defaultExtensionNs="com.intellij">
-    <configurationType implementation="com.plugin.CabalDebugConfigurationType"/>
-    <programRunner implementation="com.plugin.CabalDebugRunner"/>
-    <runConfigurationProducer implementation="com.plugin.CabalDebugConfigurationProducer"/>
+    <configurationType implementation="com.debug_tools.CabalDebugConfigurationType"/>
+    <programRunner implementation="com.debug_tools.CabalDebugRunner"/>
+    <runConfigurationProducer implementation="com.debug_tools.CabalDebugConfigurationProducer"/>
 </extensions>
 </idea-plugin>

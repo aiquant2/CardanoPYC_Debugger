@@ -1,5 +1,5 @@
 
-package com.haskell.ghcid;
+package com.diagnostics;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;

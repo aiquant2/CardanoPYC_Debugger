@@ -1,4 +1,4 @@
-package com.plugin;
+package com.debug_tools;
 
 import com.intellij.openapi.options.SettingsEditor;
 import org.jetbrains.annotations.NotNull;
