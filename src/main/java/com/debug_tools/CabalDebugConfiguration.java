@@ -46,8 +46,6 @@ public class CabalDebugConfiguration extends LocatableConfigurationBase<CommandL
         return commandLine;
     }
 
-
-
     @NotNull
     @Override
     public CommandLineState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {
