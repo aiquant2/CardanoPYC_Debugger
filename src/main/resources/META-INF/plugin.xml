@@ -72,6 +72,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Ghcid Notifications" displayType="BALLOON" />
+
         <!-- Project Services -->
         <projectService serviceImplementation="com.diagnostics.GhcidRunner"/>
 
