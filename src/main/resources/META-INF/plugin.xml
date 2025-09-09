@@ -22,6 +22,14 @@
         <colorScheme schemePath="/colors/YellowJavaColorScheme.xml"/>
 
 
+
+
+        <programRunner implementation="com.plugin.CabalDebugRunner"
+                       order="first"/>
+
+
+
+
     </extensions>
     <projectListeners>
         <listener

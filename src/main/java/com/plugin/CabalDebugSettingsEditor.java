@@ -3,6 +3,8 @@ package com.plugin;
 import com.intellij.openapi.options.SettingsEditor;
 import org.jetbrains.annotations.NotNull;
 
+
+
 import javax.swing.*;
 
 public class CabalDebugSettingsEditor extends SettingsEditor<CabalDebugConfiguration> {

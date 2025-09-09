@@ -32,3 +32,5 @@ public class CabalDebugConfigurationProducer extends RunConfigurationProducer<Ca
         return CabalProjectDetector.isCabalProject(context.getProject());
     }
 }
+
+
