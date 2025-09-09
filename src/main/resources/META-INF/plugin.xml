@@ -1,8 +1,66 @@
 
+<!--<idea-plugin>-->
+<!--    <id>aiquant.cardanopyc_debugger</id>-->
+<!--    <name>CardanoPyC Debugger</name>-->
+<!--    <vendor url ="https://github.com/AIQUANT-Tech"> AIQUANT TECHNOLOGIES</vendor>-->
+
+<!--    <description><![CDATA[-->
+<!--        A sample plugin that supports for debugging haskell / smart contract.<br>-->
+<!--        <em>Developed with love using the IntelliJ Platform</em>-->
+<!--    ]]></description>-->
+<!--    <idea-version since-build="241" until-build="252.*"/>-->
+
+
+
+
+<!--    &lt;!&ndash; Platform dependency (keep this) &ndash;&gt;-->
+<!--    <depends>com.intellij.modules.platform</depends>-->
+
+
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <projectService serviceImplementation="com.diagnostics.GhcidRunner"/>-->
+
+
+<!--    </extensions>-->
+<!--    <projectListeners>-->
+<!--        <listener-->
+<!--                class="com.diagnostics.HaskellFileListener"-->
+<!--                topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>-->
+<!--    </projectListeners>-->
+<!--    <actions>-->
+<!--        <action id="HaskellGhcid.Start"-->
+<!--                class="com.diagnostics.StartGhcidAction"-->
+<!--                text="Start GHCID"-->
+<!--                description="Start Haskell error checking with ghcid">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="last"/>-->
+<!--        </action>-->
+
+
+
+
+<!--        <action id="HaskellGhcid.Stop"-->
+<!--                class="com.diagnostics.StopGhcidAction"-->
+<!--                text="Stop GHCID"-->
+<!--                description="Stop Haskell error checking">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="last"/>-->
+<!--        </action>-->
+
+<!--    </actions>-->
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <programRunner-->
+<!--                implementation="com.debug_tools.CabalDebugRunner"-->
+<!--                id="CabalDebugRunner"-->
+<!--                order="first"/>-->
+<!--    <configurationType implementation="com.debug_tools.CabalDebugConfigurationType"/>-->
+<!--&lt;!&ndash;    <programRunner implementation="com.debug_tools.CabalDebugRunner"/>&ndash;&gt;-->
+<!--    <runConfigurationProducer implementation="com.debug_tools.CabalDebugConfigurationProducer"/>-->
+<!--</extensions>-->
+<!--</idea-plugin>-->
+
 <idea-plugin>
     <id>aiquant.cardanopyc_debugger</id>
     <name>CardanoPyC Debugger</name>
-    <vendor url ="https://github.com/AIQUANT-Tech"> AIQUANT TECHNOLOGIES</vendor>
+    <vendor url="https://github.com/AIQUANT-Tech">AIQUANT TECHNOLOGIES</vendor>
 
     <description><![CDATA[
         A sample plugin that supports for debugging haskell / smart contract.<br>
@@ -10,23 +68,33 @@
     ]]></description>
     <idea-version since-build="241" until-build="252.*"/>
 
-
-
-
     <!-- Platform dependency (keep this) -->
     <depends>com.intellij.modules.platform</depends>
 
-
     <extensions defaultExtensionNs="com.intellij">
+        <!-- Project Services -->
         <projectService serviceImplementation="com.diagnostics.GhcidRunner"/>
 
+        <!-- Program Runner -->
+        <programRunner
+                implementation="com.debug_tools.CabalDebugRunner"
+                id="CabalDebugRunner"
+                order="first"/>
+
+        <!-- Configuration Type -->
+        <configurationType implementation="com.debug_tools.CabalDebugConfigurationType"/>
+
+        <!-- Run Configuration Producer -->
+        <runConfigurationProducer implementation="com.debug_tools.CabalDebugConfigurationProducer"/>
 
     </extensions>
+
     <projectListeners>
         <listener
                 class="com.diagnostics.HaskellFileListener"
                 topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
     </projectListeners>
+
     <actions>
         <action id="HaskellGhcid.Start"
                 class="com.diagnostics.StartGhcidAction"
@@ -35,20 +103,11 @@
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
 
-
-
-
         <action id="HaskellGhcid.Stop"
                 class="com.diagnostics.StopGhcidAction"
                 text="Stop GHCID"
                 description="Stop Haskell error checking">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
-
     </actions>
-    <extensions defaultExtensionNs="com.intellij">
-    <configurationType implementation="com.debug_tools.CabalDebugConfigurationType"/>
-    <programRunner implementation="com.debug_tools.CabalDebugRunner"/>
-    <runConfigurationProducer implementation="com.debug_tools.CabalDebugConfigurationProducer"/>
-</extensions>
 </idea-plugin>
