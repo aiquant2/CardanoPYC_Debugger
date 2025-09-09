@@ -565,6 +565,9 @@ public class GhcidRunner implements Disposable {
         }
     }
 
+    // ... existing code ...
+    private com.intellij.notification.Notification currentNotification;
+
     public void start() {
         stop(); // cleanup old process
         clearAllHighlights();
@@ -573,19 +576,29 @@ public class GhcidRunner implements Disposable {
         // 🔍 Check if ghcid installed
         if (!isGhcidInstalled()) {
             ApplicationManager.getApplication().invokeLater(() -> {
-                // Fixed: Use proper Notification creation
-                com.intellij.notification.Notification notification =
-                        com.intellij.notification.NotificationGroupManager.getInstance()
-                                .getNotificationGroup("Ghcid Notifications")
-                                .createNotification(
-                                        "Ghcid not found",
-                                        "Please install Ghcid (cabal install ghcid / stack install ghcid).",
-                                        com.intellij.notification.NotificationType.ERROR
-                                );
-                notification.notify(project);
+                // Expire any existing notification
+                if (currentNotification != null && !currentNotification.isExpired()) {
+                    currentNotification.expire();
+                }
+
+                currentNotification = com.intellij.notification.NotificationGroupManager.getInstance()
+                        .getNotificationGroup("Ghcid Notifications")
+                        .createNotification(
+                                "Ghcid not found",
+                                "Please install Ghcid (cabal install ghcid / stack install ghcid) for diagnostics.",
+                                com.intellij.notification.NotificationType.ERROR
+                        );
+                currentNotification.notify(project);
             });
-            return; // stop start() if ghcid not found
+            return;
         }
+
+        // Clear notification if ghcid is found
+        if (currentNotification != null && !currentNotification.isExpired()) {
+            currentNotification.expire();
+            currentNotification = null;
+        }
+
 
         try {
             GeneralCommandLine commandLine = new GeneralCommandLine()
@@ -790,6 +803,7 @@ public class GhcidRunner implements Disposable {
     }
 
     private int findErrorEndOffset(String text) {
+        System.out.println(text);
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             if (Character.isWhitespace(ch) || ";,(){}[]".indexOf(ch) != -1) {
