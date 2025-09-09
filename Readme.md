@@ -26,6 +26,10 @@ This plugin is perfect for developers building on the Cardano blockchain, enabli
 
 ---
 
+## 🚀 Getting Started
+
+To start debugging Haskell and Plutus smart contracts with CardanoPyC Debugger, set up your development environment and install the plugin by following the steps below.
+
 ## 📥 Installation
 
 1. Clone the repository:
@@ -38,6 +42,7 @@ This plugin is perfect for developers building on the Cardano blockchain, enabli
 ```
    ./gradlew buildPlugin
 ```
+4. Once installed, the plugins will activate automatically when you open `.hs` files in Pycharm IDE.
 
 ## 🏗️ Development
 
@@ -50,30 +55,51 @@ This plugin is perfect for developers building on the Cardano blockchain, enabli
 ## 🚀 Features
 
 
-## Diagnostics
+### Diagnostics
 - Highlights errors directly in the editor for Haskell files (.hs)
 - Provides intelligent suggestions for fixing issues
 
-### Error Highlighting
+#### Error Highlighting
 ![Diagnostics](images/diagnostics.png)
 
-### Error Suggestion
+#### Error Suggestion
 ![Error Suggestion](images/error_suggestion.png)
 
-## Debug Tools
+### Debug Tools
 - Displays compilation/runtime errors in the Debug Console
 - Helps developers quickly identify and resolve problems
   ![Debug_part](images/debug_part.gif)
 
-### Debug Button
+#### Debug Button
 ![Debug Button](images/debug_button.png)
 
-### Debug Error(If any error)
+#### Debug Error(If any error)
 ![Debug Error](images/debug_error.png)
 
 ## 📋 Prerequisites
 
 - For diagnostic → ghcid must be installed .
+- For debug → .cabal file must be there in the root directory .
+
+## 🛠️ Usage
+### Installation
+##### cabal
+- install cabal from ghcup
+  link - https://www.haskell.org/ghcup/
+
+For Linux, run this in a terminal:
+```
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+ 
+ghcup tui
+ 
+```
+
+##### ghcid
+```
+$ cabal update
+$ cabal install ghcid
+```
 
 
 ## Development Environment
@@ -104,7 +130,7 @@ CardanoPyC_Debugger
        │                └── haskell
        │
        │── build.gradle.kts                
-       │── gradle.properties
+       └── gradle.properties
 ```
 
 ## 🛠️ Build Configuration
