@@ -50,13 +50,26 @@ This plugin is perfect for developers building on the Cardano blockchain, enabli
 ## 🚀 Features
 
 
-### Diagnostics
+## Diagnostics
 - Highlights errors directly in the editor for Haskell files (.hs)
 - Provides intelligent suggestions for fixing issues
 
-### Debug Tools
+### Error Highlighting
+![Diagnostics](images/diagnostics.png)
+
+### Error Suggestion
+![Error Suggestion](images/error_suggestion.png)
+
+## Debug Tools
 - Displays compilation/runtime errors in the Debug Console
 - Helps developers quickly identify and resolve problems
+  ![Debug_part](images/debug_part.gif)
+
+### Debug Button
+![Debug Button](images/debug_button.png)
+
+### Debug Error(If any error)
+![Debug Error](images/debug_error.png)
 
 ## 📋 Prerequisites
 
@@ -84,13 +97,14 @@ CardanoPyC_Debugger
        │       ├── icons
        │       └── META-INF
        └── test
-            └── java
-                 └── com
-                      ├── debug_tools
-                      ├── diagnostics
-                      └── haskell
-                       
-
+       │      └── java
+       │           └── com
+       │                ├── debug_tools
+       │                ├── diagnostics
+       │                └── haskell
+       │
+       │── build.gradle.kts                
+       │── gradle.properties
 ```
 
 ## 🛠️ Build Configuration
@@ -100,7 +114,7 @@ The project uses Gradle with the IntelliJ Platform Plugin. Key configuration fil
 - `plugin.xml` - Plugin manifest and extension points
 
 ## 🎨 Icons
-- Custom icons located in `/icons/` directory
+- Custom icons located in `src/main/resources/icons/` directory
 
 
 ## 🤝 Contributing
